@@ -1,0 +1,174 @@
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+INFO: Configuration of usage of soft references inside of containers of results of SQL execution
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+INFO: Initial or maximum values of heap memory usage are NOT set, containers of results of SQL executors will NOT use soft references by default
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+INFO: Auto configuration of disk cache size.
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+INFO: Disk cache size is directly set by the user to the 64 mb
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+WARNING: The configured memory chunk size (2147483647 bytes) is larger than the configured maximum amount of JVM direct memory (716177408 bytes). That may cause out of memory errors, please tune the configuration up. Use the -XX:MaxDirectMemorySize JVM option to raise the JVM maximum direct memory size or memory.chunk.size OrientDB option to lower memory chunk size.
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+WARNING: The configured memory chunk size (2147483647 bytes) is larger than the configured maximum cache size (67108864 bytes). That may cause overallocation of a memory which will be wasted, please tune the configuration up. Use the storage.diskCache.bufferSize OrientDB option to raise the cache memory size or memory.chunk.size OrientDB option to lower memory chunk size.
+Jun 29, 2018 11:17:13 AM com.orientechnologies.common.log.OLogManager log
+INFO: Lowering memory chunk size from 2,147,483,647B to 67,108,864B.
+Jun 29, 2018 11:17:14 AM com.orientechnologies.common.log.OLogManager log
+WARNING: $ANSI{green {db=graph-2.0.5}} Storage 'graph-2.0.5' was not closed properly. Will try to recover from write ahead log...
+Jun 29, 2018 11:17:14 AM com.orientechnologies.common.log.OLogManager log
+WARNING: $ANSI{green {db=graph-2.0.5}} Restore is not possible because write ahead log is empty.
+Jun 29, 2018 11:17:14 AM com.orientechnologies.common.log.OLogManager log
+INFO: $ANSI{green {db=graph-2.0.5}} Storage data recover was completed
+Jun 29, 2018 11:17:15 AM com.orientechnologies.common.log.OLogManager log
+INFO: Storage 'plocal:/home/s4n/Documents/projects/scala-test/.ensime_cache/graph-2.0.5' is opened under OrientDB distribution : 2.2.33 (build 77584cd6827f647cf4aa231cf27bd6f10bc04e2c, branch 2.2.x)
+Uncaught error from thread [ENSIME-akka.search-service-dispatcher-15]: GC overhead limit exceeded, shutting down ActorSystem[ENSIME]
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at java.util.Arrays.copyOfRange(Arrays.java:3664)
+	at java.lang.String.<init>(String.java:207)
+	at java.lang.String.substring(String.java:1969)
+	at java.lang.String.split(String.java:2368)
+	at java.lang.String.split(String.java:2422)
+	at scala.collection.immutable.StringLike.split(StringLike.scala:257)
+	at scala.collection.immutable.StringLike.split$(StringLike.scala:256)
+	at scala.collection.immutable.StringOps.split(StringOps.scala:29)
+	at org.ensime.indexer.ClassName$.fromFqn(domain.scala:111)
+	at org.ensime.indexer.ClassName$.fromInternal(domain.scala:108)
+	at org.ensime.indexer.ClassfileIndexer$ReferenceInMethodHunter.visitTypeInsn(ClassfileIndexer.scala:287)
+	at org.ensime.indexer.ClassfileIndexer$ReferenceInMethodHunter.visitTypeInsn$(ClassfileIndexer.scala:286)
+	at org.ensime.indexer.ClassfileIndexer$AsmCallback$$anon$2.visitTypeInsn(ClassfileIndexer.scala:153)
+	at org.objectweb.asm.ClassReader.readCode(ClassReader.java:2210)
+	at org.objectweb.asm.ClassReader.readMethod(ClassReader.java:1238)
+	at org.objectweb.asm.ClassReader.accept(ClassReader.java:631)
+	at org.objectweb.asm.ClassReader.accept(ClassReader.java:355)
+	at org.ensime.indexer.ClassfileIndexer.indexClassfile(ClassfileIndexer.scala:27)
+	at org.ensime.indexer.SearchService.$anonfun$extractSymbols$1(SearchService.scala:314)
+	at org.ensime.indexer.SearchService$$Lambda$1365/1627643282.apply(Unknown Source)
+	at scala.collection.TraversableLike.$anonfun$flatMap$1(TraversableLike.scala:241)
+	at scala.collection.TraversableLike$$Lambda$224/1392114249.apply(Unknown Source)
+	at scala.collection.mutable.HashSet.foreach(HashSet.scala:78)
+	at scala.collection.TraversableLike.flatMap(TraversableLike.scala:241)
+	at scala.collection.TraversableLike.flatMap$(TraversableLike.scala:238)
+	at scala.collection.AbstractTraversable.flatMap(Traversable.scala:104)
+	at org.ensime.indexer.SearchService.extractSymbols(SearchService.scala:396)
+	at org.ensime.indexer.SearchService.$anonfun$extractSymbolsFromClassOrJar$4(SearchService.scala:279)
+	at org.ensime.indexer.SearchService$$Lambda$1203/1519977949.apply(Unknown Source)
+	at scala.collection.TraversableLike.$anonfun$flatMap$1(TraversableLike.scala:241)
+	at scala.collection.TraversableLike$$Lambda$224/1392114249.apply(Unknown Source)
+	at scala.collection.mutable.HashMap.$anonfun$foreach$1(HashMap.scala:138)
+Jun 29, 2018 11:20:13 AM com.orientechnologies.common.log.OLogManager log
+SEVERE: Exception `0162D1D0` in storage `plocal:/home/s4n/Documents/projects/scala-test/.ensime_cache/graph-2.0.5`: 2.2.33 (build 77584cd6827f647cf4aa231cf27bd6f10bc04e2c, branch 2.2.x)
+com.orientechnologies.orient.core.exception.OStorageException: Error during transaction commit
+	DB name="graph-2.0.5"
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.makeRollback(OAbstractPaginatedStorage.java:2856)
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.commit(OAbstractPaginatedStorage.java:1869)
+	at com.orientechnologies.orient.core.tx.OTransactionOptimistic.doCommit(OTransactionOptimistic.java:541)
+	at com.orientechnologies.orient.core.tx.OTransactionOptimistic.commit(OTransactionOptimistic.java:99)
+	at com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx.commit(ODatabaseDocumentTx.java:2923)
+	at com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx.commit(ODatabaseDocumentTx.java:2885)
+	at com.tinkerpop.blueprints.impls.orient.OrientTransactionalGraph.commit(OrientTransactionalGraph.java:182)
+	at org.ensime.indexer.graph.GraphService.$anonfun$persist$1(GraphService.scala:380)
+	at org.ensime.indexer.graph.GraphService.$anonfun$persist$1$adapted(GraphService.scala:236)
+	at org.ensime.indexer.orientdb.syntax.package$.withGraph(SimpleOrient.scala:180)
+	at org.ensime.indexer.orientdb.syntax.package$.$anonfun$withGraphAsync$2(SimpleOrient.scala:191)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:53)
+	at scala.concurrent.package$.blocking(package.scala:142)
+	at org.ensime.indexer.orientdb.syntax.package$.$anonfun$withGraphAsync$1(SimpleOrient.scala:191)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:654)
+	at scala.util.Success.$anonfun$map$1(Try.scala:251)
+	at scala.util.Success.map(Try.scala:209)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:288)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:29)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:29)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.channels.ClosedByInterruptException
+	at java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202)
+	at sun.nio.ch.FileChannelImpl.writeInternal(FileChannelImpl.java:783)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:764)
+	at com.orientechnologies.common.io.OIOUtils.writeByteBuffer(OIOUtils.java:412)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.writeBuffer(OFileClassic.java:540)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.setSize(OFileClassic.java:558)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.allocateSpace(OFileClassic.java:75)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache.load(OWOWCache.java:837)
+	at com.orientechnologies.orient.core.storage.cache.local.twoq.O2QCache.updateCache(O2QCache.java:1166)
+	at com.orientechnologies.orient.core.storage.cache.local.twoq.O2QCache.doLoad(O2QCache.java:361)
+	at com.orientechnologies.orient.core.storage.cache.local.twoq.O2QCache.allocateNewPage(O2QCache.java:412)
+	at com.orientechnologies.orient.core.storage.impl.local.paginated.atomicoperations.OAtomicOperation.commitChanges(OAtomicOperation.java:434)
+	at com.orientechnologies.orient.core.storage.impl.local.paginated.atomicoperations.OAtomicOperationsManager.endAtomicOperation(OAtomicOperationsManager.java:468)
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.endStorageTx(OAbstractPaginatedStorage.java:3879)
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.commit(OAbstractPaginatedStorage.java:1862)
+	... 22 more
+
+Jun 29, 2018 11:20:13 AM com.orientechnologies.common.log.OLogManager log
+SEVERE: $ANSI{green {db=graph-2.0.5}} Error on transaction commit `0162D1D0`
+com.orientechnologies.orient.core.exception.OStorageException: Error during transaction commit
+	DB name="graph-2.0.5"
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.makeRollback(OAbstractPaginatedStorage.java:2856)
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.commit(OAbstractPaginatedStorage.java:1869)
+	at com.orientechnologies.orient.core.tx.OTransactionOptimistic.doCommit(OTransactionOptimistic.java:541)
+	at com.orientechnologies.orient.core.tx.OTransactionOptimistic.commit(OTransactionOptimistic.java:99)
+	at com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx.commit(ODatabaseDocumentTx.java:2923)
+	at com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx.commit(ODatabaseDocumentTx.java:2885)
+	at com.tinkerpop.blueprints.impls.orient.OrientTransactionalGraph.commit(OrientTransactionalGraph.java:182)
+	at org.ensime.indexer.graph.GraphService.$anonfun$persist$1(GraphService.scala:380)
+	at org.ensime.indexer.graph.GraphService.$anonfun$persist$1$adapted(GraphService.scala:236)
+	at org.ensime.indexer.orientdb.syntax.package$.withGraph(SimpleOrient.scala:180)
+	at org.ensime.indexer.orientdb.syntax.package$.$anonfun$withGraphAsync$2(SimpleOrient.scala:191)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:53)
+	at scala.concurrent.package$.blocking(package.scala:142)
+	at org.ensime.indexer.orientdb.syntax.package$.$anonfun$withGraphAsync$1(SimpleOrient.scala:191)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:654)
+	at scala.util.Success.$anonfun$map$1(Try.scala:251)
+	at scala.util.Success.map(Try.scala:209)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:288)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:29)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:29)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.channels.ClosedByInterruptException
+	at java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202)
+	at sun.nio.ch.FileChannelImpl.writeInternal(FileChannelImpl.java:783)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:764)
+	at com.orientechnologies.common.io.OIOUtils.writeByteBuffer(OIOUtils.java:412)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.writeBuffer(OFileClassic.java:540)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.setSize(OFileClassic.java:558)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.allocateSpace(OFileClassic.java:75)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache.load(OWOWCache.java:837)
+	at com.orientechnologies.orient.core.storage.cache.local.twoq.O2QCache.updateCache(O2QCache.java:1166)
+	at com.orientechnologies.orient.core.storage.cache.local.twoq.O2QCache.doLoad(O2QCache.java:361)
+	at com.orientechnologies.orient.core.storage.cache.local.twoq.O2QCache.allocateNewPage(O2QCache.java:412)
+	at com.orientechnologies.orient.core.storage.impl.local.paginated.atomicoperations.OAtomicOperation.commitChanges(OAtomicOperation.java:434)
+	at com.orientechnologies.orient.core.storage.impl.local.paginated.atomicoperations.OAtomicOperationsManager.endAtomicOperation(OAtomicOperationsManager.java:468)
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.endStorageTx(OAbstractPaginatedStorage.java:3879)
+	at com.orientechnologies.orient.core.storage.impl.local.OAbstractPaginatedStorage.commit(OAbstractPaginatedStorage.java:1862)
+	... 22 more
+
+Jun 29, 2018 11:20:13 AM com.orientechnologies.common.log.OLogManager log
+SEVERE: Error during write of data for file 'classdef.pcl' 1-th attempt
+java.nio.channels.ClosedChannelException
+	at sun.nio.ch.FileChannelImpl.ensureOpen(FileChannelImpl.java:110)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:758)
+	at com.orientechnologies.common.io.OIOUtils.writeByteBuffer(OIOUtils.java:412)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.writeInternal(OFileClassic.java:239)
+	at com.orientechnologies.orient.core.storage.fs.OFileClassic.write(OFileClassic.java:449)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache.flushPage(OWOWCache.java:1698)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache.access$2900(OWOWCache.java:77)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache$PeriodicFlushTask.iterateByCacheSubRing(OWOWCache.java:2080)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache$PeriodicFlushTask.iterateBySubRing(OWOWCache.java:1951)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache$PeriodicFlushTask.flushRing(OWOWCache.java:1894)
+	at com.orientechnologies.orient.core.storage.cache.local.OWOWCache$PeriodicFlushTask.run(OWOWCache.java:1849)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+Jun 29, 2018 11:28:33 AM com.orientechnologies.common.log.OLogManager log
+INFO: Orient Engine is shutting down...
+Jun 29, 2018 11:28:33 AM com.orientechnologies.common.log.OLogManager log
+INFO: - shutdown storage: graph-2.0.5...
