@@ -125,6 +125,17 @@ class Lists extends FunSuite {
             )
     }
 
+    test("filter a list") {
+        var list = List(1, 2, 3, 4, 5)
+        var filteredList = list.filter(el => el % 2 == 0)
+
+        var strList = List("ac", "dc", "ai", "cd")
+        var filteredStrList = strList.filter(str => str.startsWith("a"))
+
+        assert(List(2, 4) == filteredList)
+        assert(List("ac", "ai") == filteredStrList)
+    }
+
 
 
 }
