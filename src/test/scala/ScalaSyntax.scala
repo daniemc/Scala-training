@@ -1,6 +1,6 @@
 import org.scalatest._;
 
-class ScalaSintax extends FunSuite {
+class ScalaSyntax extends FunSuite {
 
   test("this is a test") {
     var x = 1
@@ -169,6 +169,23 @@ class ScalaSintax extends FunSuite {
     assert(5 == result4)
 
   } 
+
+  test("scala classes default value params") {
+
+    // note that you need to add 'var' 
+    class DefaultClass(var num1 : Int = 0, var num2 : Int = 5)
+    
+    class DefaultClass2(num1 : Int = 0, num2 : Int = 5)
+
+    var mydef = new DefaultClass
+    var mydef2 = new DefaultClass2
+
+    assert(0 == mydef.num1)
+    assert(5 == mydef.num2)
+
+    // without var can't access value, compile error
+    assertDoesNotCompile("0 == mydef2.num1")
+  }
 
   test("class state can be changed") {
 
