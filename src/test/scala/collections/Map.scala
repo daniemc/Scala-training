@@ -17,11 +17,24 @@ class Map extends FunSuite {
 
         // i can use get
         var num2 = myMap.get("b")
-        // but it returns an option
+        // but it returns an option (convenient)
         assert(Some(27) == num2)
+    }
 
-        var num3 = myMap.get("d")
-        assert(None == num3)
+    test("if you try to access a non existing element with get, it returns none") {
+        var myMap = Map("a" -> 1, "b" -> 27, "c" -> 2)
+        
+        var num1 = myMap.get("d")
+        assert(None == num1)
+    }
+
+    test("if you try to access a non existing element without get, it returns throwable") {
+        var myMap = Map("a" -> 1, "b" -> 27, "c" -> 2)
+        
+        assertThrows[NoSuchElementException] {
+            var num1 = myMap("d")
+        }
+        
     }
 
     test("loop and operate through map values") {
@@ -66,16 +79,16 @@ class Map extends FunSuite {
         assertResult(List(3, 4, 5))(mapResult)
     }
 
-    test("transform a Map with map") {
+    test("transform a Map with map with condition") {
         var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
-        var mapResult = myMap map (keyValue => {
+        var mapResult = myMap map (keyValue => (keyValue._1 ,{
             if (keyValue._1 == "b") 
                 keyValue._2 * 5 
             else
                 keyValue._2 
-        })
+        }))
 
-        println(mapResult)
+        assertResult(Map("a" -> 1, "b" -> 10, "c" -> 3))(mapResult)
     }
 
     
