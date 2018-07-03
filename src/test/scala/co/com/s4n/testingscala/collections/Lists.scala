@@ -1,3 +1,5 @@
+package co.com.s4n.testingscala.collections
+
 import org.scalatest._
 
 class Lists extends FunSuite {

@@ -1,3 +1,5 @@
+package co.com.s4n.testingscala.syntax
+
 import org.scalatest._;
 
 class MyFirstScalaTest extends FlatSpec {
