@@ -91,6 +91,24 @@ class Map extends FunSuite {
         assertResult(Map("a" -> 1, "b" -> 10, "c" -> 3))(mapResult)
     }
 
+    test("split a map an access it like a tuple") {
+        var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+
+        var splitedMap = myMap.splitAt(2);
+
+        assertResult(Map("a" -> 1, "b" -> 2))(splitedMap._1)
+        assertResult(Map("c" -> 3))(splitedMap._2)
+    }
+
+    test("split a map in two varibles") {
+        var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+
+        var (map1, map2) = myMap.splitAt(2);
+
+        assertResult(Map("a" -> 1, "b" -> 2))(map1)
+        assertResult(Map("c" -> 3))(map2)
+    }
+
     
 
 }
