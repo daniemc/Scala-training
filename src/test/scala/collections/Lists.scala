@@ -7,12 +7,12 @@ class Lists extends FunSuite {
         assert(List(1, 2, 3) == myList)
     }
 
-    test("list definition with explicit value") {
+    test("list definition with explicit type") {
         val myStrList : List[String] = List("this", "is", "a", "list");
         assert(List("this", "is", "a", "list") == myStrList)
     }
 
-    test("lists can contain multiple types") {
+    test("lists can contain multiple types of values") {
         val multiList = List(1, "str1", 2, "str2")
         assert(List(1, "str1", 2, "str2") == multiList)
     }
@@ -27,7 +27,7 @@ class Lists extends FunSuite {
         assert(List(1, 2, 3) == myList2)
     }
 
-    test("define a list element by element fail (without 'Nil' at the end)") {        
+    test("define a list element by element fail without 'Nil' at the end") {        
         
         assertDoesNotCompile("val myList = 1 :: 2 :: 3")
     
@@ -75,13 +75,71 @@ class Lists extends FunSuite {
         assert(List(2 , 3) == tailElements)
     }
 
-    test("take elements in tal of a empty list") {
+    test("take elements in tail of a empty list") {
         var list = List()
 
         // must fail with UnsupportedOperationException
-        assertThrows[Exception] {
+        assertThrows[UnsupportedOperationException] {
             list.tail
         }
+    }    
+
+    test("split a list") {
+        var list = List(1, 2, 3, 4)
+        var splitedList = list.splitAt(2);
+        
+        assert(List(1, 2) == splitedList._1)
+        assert(List(3, 4) == splitedList._2)
+    }
+
+    test("reverse a list") {
+        var list = List(1, 2, 3, 4)
+        var reversedList = list.reverse
+
+        assert(List(4, 3, 2, 1) == reversedList)
+    }
+
+    test("you can serialize a list as String") {
+        var list = List(1, 2, 3, 4)
+
+        // you choose delimiter
+        var strList1 = list.mkString("-")
+
+        // or not
+        var strList2 = list.mkString
+
+        assert("1-2-3-4" == strList1)  
+        assert("1234" == strList2)  
+    }
+
+    test("you can make some operations with list") {
+        var list = List(1, 2, 3, 4)
+
+        var sum = list.sum
+        var max = list.max
+        var min = list.min 
+
+        assert(10 == sum)
+        assert(4 == max)
+        assert(1 == min)
+    }
+
+    test("you can take elements from a list") {
+        var list = List(1, 4, 2, 6, 3, 5, 0, 7, 3, 9, 8)
+
+        // take elements from left
+        var firstFourelements = list.take(4)
+
+        // take elements from wight        
+        var lastFourElements = list.takeRight(4)
+
+        // take elements while condition is true
+        var takeCondition = list.takeWhile(_ > 0)
+
+        assert(List(1, 4, 2, 6) == firstFourelements)
+        assert(List(7, 3, 9, 8) == lastFourElements)
+        assert(List(1, 4, 2, 6, 3, 5) == takeCondition)
+
     }
 
     test("drop elements of a list") {
@@ -111,7 +169,7 @@ class Lists extends FunSuite {
         assert(List(2, 4, 6, 8, 10) == resultList)
     }
 
-    test("transform list elements with a given fucntion") {
+    test("transform list elements with a given function") {
         def myFunction = (str : String) => str + " added str"
         var list = List("text1", "text2", "text3", "text4")
 
@@ -134,6 +192,35 @@ class Lists extends FunSuite {
 
         assert(List(2, 4) == filteredList)
         assert(List("ac", "ai") == filteredStrList)
+    }
+
+    test("use fold to operate a list") {
+        var list = List(1, 2, 3, 4, 5)
+
+        var listSumResult1 = list.fold(0)((accum, el) => accum + el)
+
+        // you can do it many ways
+        var listSumResult2 = list.fold(0) {
+                (accum, el) => accum + el
+            }
+
+        var listSumResult3 = list.fold(0)(_ + _)
+
+        assert(15 == listSumResult1)
+        assert(15 == listSumResult2)
+        assert(15 == listSumResult3)
+    }
+
+    test("test - get average of pair numbers sum") {
+        val list = List(1, 2, 3, 4, 6, 7, 8, 9, 10)
+        
+        var (sum, resultLength) = list
+            .filter(num => num % 2 == 0)
+            .foldLeft(0, 0)((accum, num) => (accum._1 + num, accum._2 + 1))
+
+        val avg = sum / resultLength
+        
+        assert(6 == avg)
     }
 
 
