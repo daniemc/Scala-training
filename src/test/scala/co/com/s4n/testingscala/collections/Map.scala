@@ -111,6 +111,39 @@ class Map extends FunSuite {
         assertResult(Map("c" -> 3))(map2)
     }
 
+    test("you can loop a Map with foreach") {
+        var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+        var sum = 0;
+        myMap.foreach(x => {
+            sum += x._2
+        })
+
+        assert(6 == sum)
+    }
+
+    test("you can drop elements with the position from left") {
+        var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+
+        var mapResult = myMap.drop(1)
+        assert(Map("b" -> 2, "c" -> 3) == mapResult)
+    }
+
+    test("you can drop elements with the position from right") {
+        var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+
+        var mapResult = myMap.dropRight(1)
+        assert(Map("a" -> 1, "b" -> 2) == mapResult)
+    }
+
+    test("you can't drop elements with key") {
+        var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+        
+        assertDoesNotCompile("myMap.drop(\"a\")")
+        
+    }
+
+
+
     
 
 }
