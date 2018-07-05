@@ -19,6 +19,13 @@ class Lists extends FunSuite {
         assert(List(1, "str1", 2, "str2") == multiList)
     }
 
+    test("list can contain duplicate values") {
+        val myList = List(1, 1, 2, 2, 3, 3)
+
+        assert(List(1, 1, 2, 2, 3, 3) == myList)
+        assert(6 == myList.length)
+    }
+
     test("define a list element by element") {
         // note that should end with 'Nil'
         val myList = 1 :: 2 :: 3 :: Nil
