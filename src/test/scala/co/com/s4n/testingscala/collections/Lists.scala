@@ -35,6 +35,11 @@ class Lists extends FunSuite {
     
     }
 
+    test("length of a list") {
+        val myList = List(1, 2, 3)
+        assert(3 == myList.length)
+    }
+
     test("append elements to a lists") {
         var list = List(1, 2 , 3)
         var list2 = list :+ 4
