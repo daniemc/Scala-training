@@ -208,4 +208,59 @@ class Map extends FunSuite {
     assert(Map(1 -> "Tailor", 3 -> "Tania", 5 -> "John") == spesificKeyFilter)
   }
 
+  test("you can take Map values to a iterable") {
+    var myMap = Map("a" -> 1, "b" -> 2, "c" -> 3)
+    var mapValues = myMap.values
+
+    var sum = 0
+
+    mapValues.foreach(value => {
+      sum += value
+    })
+
+    assert(6 == sum)
+  }
+
+  test("transform elements with map") {
+
+    def myFunction(k : String, v : Int) = (k, v * 2)
+
+    var myMap = Map("a" -> 1, "b" -> 2)
+
+    var myFlatMap = myMap.map(keyValue => myFunction(keyValue._1, keyValue._2))
+
+    assert(Map("a" -> 2, "b" -> 4) == myFlatMap)
+  }
+
+  test("transform elements with flatMap") {
+
+    def myFunction(k : String, v : Int) = (k, v + 2)
+
+    var myMap = Map("a" -> 1, "b" -> 2)
+
+    // note that with flatMap i should use a List in the return
+    // otherwise it wouldn't compile
+    var myFlatMap = myMap.flatMap(keyValue => List(myFunction(keyValue._1, keyValue._2)))
+
+    assertDoesNotCompile(
+      "myMap.flatMap(keyValue => myFunction(keyValue._1, keyValue._2))")
+
+    assert(Map("a" -> 3, "b" -> 4) == myFlatMap)
+  }
+
+  test("other way to use flatMap without use List") {
+    def myFunction(k : String, v : Int) = Some(k, v + 2)
+
+    var myMap = Map("a" -> 1, "b" -> 2)
+
+    // note that the function returns a Option type
+    var myFlatMap = myMap.flatMap(keyValue => myFunction(keyValue._1, keyValue._2))
+
+
+    assert(Map("a" -> 3, "b" -> 4) == myFlatMap)
+
+  }
+
+
+
 }
