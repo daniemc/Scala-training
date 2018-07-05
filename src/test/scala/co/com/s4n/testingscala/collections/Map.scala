@@ -10,6 +10,39 @@ class Map extends FunSuite {
         assertResult(Map(1 -> "a", 2 -> "b", 3 -> "c"))(myMap)
     }
 
+    test("you can't use length in Map") {
+        var myMap = Map(1 -> "a", 2 -> "b", 3 -> "c")
+
+        assertDoesNotCompile("myMap.length")
+
+        //instead use size method
+        assert(3 == myMap.size)
+    }
+
+    test("there can't be two values with the same key") {
+        var myMap = Map(1 -> "a", 2 -> "b", 2 -> "B2", 3 -> "c", 3 -> "C2")
+
+        assert(3 == myMap.size)
+    }
+
+    test("what happen with Map when there's duplicate keys") {
+        var myMap = Map(1 -> "a", 2 -> "b", 2 -> "B2", 3 -> "c", 3 -> "C2")
+
+        var position2 = myMap(2)
+        var position3 = myMap(3)
+
+        assert("B2" == position2)
+        assert("C2" == position3)
+
+        // this keeps the index but changes the value by the last one
+    }
+
+    test("you can have same value woth different index") {
+        var myMap = Map(1 -> "AA", 2 -> "BB", 3 -> "AA", 4 -> "BB")
+
+        assert(4 == myMap.size)
+    }
+
     test("access element in a map by its key") {
         var myMap = Map("a" -> 1, "b" -> 27, "c" -> 2)
         
@@ -140,6 +173,31 @@ class Map extends FunSuite {
         
         assertDoesNotCompile("myMap.drop(\"a\")")
         
+    }
+
+    test("you can filter a Map") {
+        var myMap = Map(1 -> "Tailor", 2 -> "Chriss", 3 -> "Tania", 
+            4 -> "Casper", 5 -> "John")
+
+        var namesStartsWithT = myMap.filter(keyValue => keyValue._2.startsWith("T"))
+        var namesStartsWithC = myMap.filter(keyValue => keyValue._2.startsWith("C"))
+
+        assert(Map(1 -> "Tailor", 3 -> "Tania") == namesStartsWithT)
+        assert(Map(2 -> "Chriss", 4 -> "Casper") == namesStartsWithC)
+
+        // also can filter by its key
+        var keyFilter = myMap.filter(keyValue => keyValue._1 % 2 != 0)
+
+        assert(Map(1 -> "Tailor", 3 -> "Tania", 5 -> "John") == keyFilter)
+    }
+
+    test("you can filter a Map by its key spesific method") {
+        var myMap = Map(1 -> "Tailor", 2 -> "Chriss", 3 -> "Tania", 
+            4 -> "Casper", 5 -> "John")
+        
+        var spesificKeyFilter = myMap.filterKeys(key => key % 2 != 0)
+
+        assert(Map(1 -> "Tailor", 3 -> "Tania", 5 -> "John") == spesificKeyFilter)
     }
 
 
