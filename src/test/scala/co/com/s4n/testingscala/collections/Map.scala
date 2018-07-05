@@ -249,11 +249,12 @@ class Map extends FunSuite {
   }
 
   test("other way to use flatMap without use List") {
+    // note that the function returns a Option type
     def myFunction(k : String, v : Int) = Some(k, v + 2)
 
     var myMap = Map("a" -> 1, "b" -> 2)
 
-    // note that the function returns a Option type
+    // and here we don't use List
     var myFlatMap = myMap.flatMap(keyValue => myFunction(keyValue._1, keyValue._2))
 
 
