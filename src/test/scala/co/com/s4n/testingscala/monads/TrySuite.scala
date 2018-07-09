@@ -80,8 +80,61 @@ class TrySuite extends FunSuite {
     assert("Failure(java.lang.ArithmeticException: / by zero)" == msg2)
   }
 
-  test("a failure can be recovered too") {
-    // val div1 = divide(12, 0).recover{}
+  test("a failure can be recovered [recover]") {
+    val div1 = divide(12, 0).recover {    
+      case e: Exception => "Division Error"
+    }
+
+    assert(Success("Division Error") == div1)
   }
+
+  test("a failure can be recovered [recoverWith]") {
+
+    // with recoverWith i must be explicit with the return type 
+    val div1 = divide(12, 0).recoverWith {    
+      case e: Exception => Success("Division Error")
+    }
+
+    val div2 = divide(12, 0).recoverWith {
+      case e: Exception => divide(0, 1)
+    }
+
+    assert(Success("Division Error") == div1)
+    assert(Success(0) == div2)
+  }
+
+  test("a try can be converted to option") {
+    val tryToOpt1 = divide(4, 2)
+    val tryToOpt2 = divide(4, 0)
+
+    val opt1 = tryToOpt1.toOption
+    val opt2 = tryToOpt2.toOption
+
+    assert(Some(2) == opt1)
+    assert(None == opt2)
+  }
+  
+  test("you can chain success in for comprenhension") {
+    val divSum = for {
+      x <- divide(8, 8)
+      y <- divide(8, 4)
+      z <- divide(8, 2)
+    } yield x + y + z
+
+    assert(Success(7) == divSum)
+  }
+
+  test("if on element in a for comph is failure, the result us Failure") {
+    val divSum = for {
+      x <- divide(8, 8)
+      y <- divide(8, 0)
+      z <- divide(8, 2)
+    } yield x + y + z
+
+    assert(divSum.isFailure)
+
+  }
+
+  
 
 }

@@ -108,7 +108,7 @@ class Option extends FunSuite {
     assert(false == optList(1).isDefined)
   }
 
-  test("for comprenhencion in Option") {
+  test("for comprenhension in Option") {
     val num1 = Some(10)
     val num2 = Some(17)
 
