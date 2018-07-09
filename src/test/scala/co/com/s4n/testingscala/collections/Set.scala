@@ -99,7 +99,7 @@ class Set extends FunSuite{
     // why 6 & 7 doesn't appear in the result set
   }
 
-  test("Set diff method don't give the same result. Depends on the order") {
+  test("Set diff method don't give the same result. it depends on the order") {
     val mySet1 = 1 to 5 toSet
     val mySet2 = 3 to 7 toSet
 
