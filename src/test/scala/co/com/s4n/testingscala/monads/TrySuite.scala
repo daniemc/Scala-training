@@ -134,6 +134,91 @@ class TrySuite extends FunSuite {
     assert(divSum.isFailure)
 
   }
+  
+  // testing monads laws
+
+  test("law 1 : left identity") {
+
+    // if you have a value
+    val num: Int = 1
+
+    // and a box (Try) that takes the same type of the value (Int)
+    // and put the value inside the box
+    val tryNum: Try[Int] = Try(num)
+
+    // and you have a function that takes the same type of the value (Int)
+    // and returns the same type of the box (Try: [Success/None])
+    val sum = (x: Int) => Success(x + 1)
+
+    // then, doing flatMap to the box (Try tryNum) 
+    // or applying it to the function (sum)
+    assert(tryNum.flatMap(sum) == sum(num))
+
+    // should return the same result
+    println("Law 1 : Left identity")
+    println(tryNum.flatMap(sum))
+    println(sum(num))
+  }
+
+  test("law 2 : right identity") {
+
+    // if you have a value
+    val num: Int = 1
+
+    // and a box (Try) that takes the same type of the value (Int)
+    // and put the value inside the box
+    val tryNum: Try[Int] = Try(num)
+    
+
+    // and you have a function that takes the same type of value 
+    // and wraps it in the same kind of box untouched
+    assert(tryNum.flatMap(x => Success(x)) == tryNum)
+
+    // then after flatMapping that function on your box should not change it
+    println("Law 2 : Right identity")
+    println(tryNum.flatMap(x => Success(x)))
+    println(tryNum)
+
+  }
+
+  test("law 3 : associativity") {
+    // if you have a value
+    val num: Int = 1
+
+    // and a box (Try) that takes the same type of the value (Int)
+    // and put the value inside the box
+    val tryNum: Try[Int] = Try(num)
+
+    // and a chain of functions that operates on it (monad)
+    val sum = (x: Int) => Success(x + 1)
+    val subs = (x: Int) => Success(x - 1)
+
+    // then it should not matter how you nest the flatMappings of those functions.
+    assert(
+      tryNum
+        .flatMap(sum)
+        .flatMap(subs) 
+      == 
+      tryNum
+        .flatMap(x => sum(x)
+          .flatMap(subs)
+        )
+    )
+
+    // it should return the same
+    println("Law 3 : Associativity")
+    println(
+      tryNum
+        .flatMap(sum)
+        .flatMap(subs) 
+    )
+    println(
+      tryNum
+        .flatMap(x => sum(x)
+          .flatMap(subs)
+        )
+    )
+  }
 
   
 
