@@ -21,14 +21,14 @@ class Modeling extends FunSuite {
 
   case class Carro(color: Color, marca: Marca) extends Vehiculo
 
-  object tallerPintura {
+  object ServicioTaller {
     def pintar(carro: Carro, nuevoColor: Color): Carro = {
       Carro(nuevoColor, carro.marca)
     }
   }
 
   test("puedo pintar mi carro carro") {
-    import tallerPintura._
+    import ServicioTaller._
 
     val miCarro = Carro(Rojo(), Renault())    
     val miCarroPintado = pintar(miCarro, Negro())
