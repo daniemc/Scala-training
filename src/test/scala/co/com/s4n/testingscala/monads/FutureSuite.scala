@@ -137,7 +137,7 @@ class FutureSuite extends FunSuite {
       case Failure(err) => println(s"Error: message: ${ err.getMessage }")
     }
 
-    // keep JVM Jobing
+    // keep JVM working
     sleep(2000)
 
     result map(value => assert(0 < value))
